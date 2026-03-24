@@ -9,7 +9,7 @@ export default async function handler(req, res) {
         const BIBLES = {
             en: 'de4e12af7f28f599-01',
             es: '592420522e16049f-01',
-            pt: 'bba9f40183526463-01'
+            pt: '90799bb5b996fddc-01'
         };
 
         const today = new Date().toISOString().split('T')[0];
