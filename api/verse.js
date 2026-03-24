@@ -1,69 +1,72 @@
-module.exports = async function handler(req, res) {
+// module.exports = async function handler(req, res) {
 
-    const API_KEY = process.env.BIBLE_API_KEY;
+//     const API_KEY = process.env.BIBLE_API_KEY;
 
-    if (!API_KEY) {
-        return res.status(500).json({ error: 'Missing API Key' });
-    }
+//     if (!API_KEY) {
+//         return res.status(500).json({ error: 'Missing API Key' });
+//     }
 
-    const BIBLES = {
-        en: 'de4e12af7f28f599-01',
-        es: '592420522e16049f-01',
-        pt: 'bba9f40183526463-01'
-    };
+//     const BIBLES = {
+//         en: 'de4e12af7f28f599-01',
+//         es: '592420522e16049f-01',
+//         pt: 'bba9f40183526463-01'
+//     };
 
-    const today = new Date().toISOString().split('T')[0];
+//     const today = new Date().toISOString().split('T')[0];
 
-    if (global.verseCache && global.verseCache.date === today) {
-        return res.status(200).json(global.verseCache.data);
-    }
+//     if (global.verseCache && global.verseCache.date === today) {
+//         return res.status(200).json(global.verseCache.data);
+//     }
 
-    const verses = [
-        'JHN.3.16',
-        'PSA.23.1',
-        'PRO.3.5',
-        'ROM.8.28',
-        'MAT.6.33',
-        'ISA.41.10',
-        'PHP.4.13'
-    ];
+//     const verses = [
+//         'JHN.3.16',
+//         'PSA.23.1',
+//         'PRO.3.5',
+//         'ROM.8.28',
+//         'MAT.6.33',
+//         'ISA.41.10',
+//         'PHP.4.13'
+//     ];
 
-    const verseId = verses[Math.floor(Math.random() * verses.length)];
+//     const verseId = verses[Math.floor(Math.random() * verses.length)];
 
-    const result = {};
+//     const result = {};
 
-    for (const lang in BIBLES) {
+//     for (const lang in BIBLES) {
 
-        const response = await fetch(
-            `https://api.scripture.api.bible/v1/bibles/${BIBLES[lang]}/verses/${verseId}`,
-            {
-                headers: {
-                    'api-key': API_KEY
-                }
-            }
-        );
+//         const response = await fetch(
+//             `https://api.scripture.api.bible/v1/bibles/${BIBLES[lang]}/verses/${verseId}`,
+//             {
+//                 headers: {
+//                     'api-key': API_KEY
+//                 }
+//             }
+//         );
 
-        const data = await response.json();
+//         const data = await response.json();
 
-        let text = data.data.content;
+//         let text = data.data.content;
 
-        text = text.replace(/<[^>]*>?/gm, '');
+//         text = text.replace(/<[^>]*>?/gm, '');
 
-        text = text.replace(/^[\d\s¶]+/, '');
+//         text = text.replace(/^[\d\s¶]+/, '');
 
-        result[lang] = `${text} (${data.data.reference})`;
-    }
+//         result[lang] = `${text} (${data.data.reference})`;
+//     }
 
-    const finalData = {
-        date: today,
-        verseId,
-        ...result
-    };
+//     const finalData = {
+//         date: today,
+//         verseId,
+//         ...result
+//     };
 
-    global.verseCache = {
-        date: today,
-        data: finalData
-    };
+//     global.verseCache = {
+//         date: today,
+//         data: finalData
+//     };
 
-    return res.status(200).json(finalData);
+//     return res.status(200).json(finalData);
+// }
+export default function handler(req, res) {
+  res.status(200).json({ ok: true });
 }
