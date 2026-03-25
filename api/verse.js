@@ -18,24 +18,15 @@ export default async function handler(req, res) {
             return res.status(200).json(global.verseCache.data);
         }
 
-        const books = [
-            'GEN', 'EXO', 'LEV', 'NUM', 'DEU', 'JOS', 'JDG', 'RUT',
-            '1SA', '2SA', '1KI', '2KI', '1CH', '2CH', 'EZR', 'NEH', 'EST',
-            'JOB', 'PSA', 'PRO', 'ECC', 'SNG',
-            'ISA', 'JER', 'LAM', 'EZK', 'DAN',
-            'HOS', 'JOL', 'AMO', 'OBA', 'JON', 'MIC', 'NAM', 'HAB', 'ZEP', 'HAG', 'ZEC', 'MAL',
-            'MAT', 'MRK', 'LUK', 'JHN', 'ACT',
-            'ROM', '1CO', '2CO', 'GAL', 'EPH', 'PHP', 'COL',
-            '1TH', '2TH', '1TI', '2TI', 'TIT', 'PHM',
-            'HEB', 'JAS', '1PE', '2PE', '1JN', '2JN', '3JN', 'JUD', 'REV'
+        const validVerses = [
+            'JHN.3.16', 'PSA.23.1', 'PRO.3.5', 'ROM.8.28', 'MAT.6.33',
+            'ISA.41.10', 'PHP.4.13', 'GEN.1.1', 'JER.29.11', 'PSA.119.105',
+            'ROM.12.2', 'HEB.11.1', 'MAT.11.28', 'JOS.1.9', 'PRO.16.3',
+            'COL.3.23', '1CO.10.13', '2TI.1.7', 'PSA.46.1', 'ISA.26.3'
         ];
 
         function getRandomVerse() {
-            const book = books[Math.floor(Math.random() * books.length)];
-            const chapter = Math.floor(Math.random() * 50) + 1;
-            const verse = Math.floor(Math.random() * 30) + 1;
-
-            return `${book}.${chapter}.${verse}`;
+            return validVerses[Math.floor(Math.random() * validVerses.length)];
         }
 
         let verseId;
@@ -94,7 +85,7 @@ export default async function handler(req, res) {
             data: finalData
         };
 
-        
+
         return res.status(200).json(finalData);
 
     } catch (error) {
