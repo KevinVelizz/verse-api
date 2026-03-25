@@ -94,6 +94,7 @@ export default async function handler(req, res) {
             data: finalData
         };
 
+        
         return res.status(200).json(finalData);
 
     } catch (error) {
